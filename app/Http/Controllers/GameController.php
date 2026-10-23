@@ -19,6 +19,16 @@ class GameController extends Controller
         return view('home', ['games' => $this->games]);
     }
 
+    public function wishlist()
+    {
+        return view('wishlist');
+    }
+
+    public function login()
+    {
+        return view('login');
+    }
+
     public function show(int $id)
     {
         abort_unless(isset($this->games[$id]), 404);
