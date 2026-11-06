@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-    <main class="wishflix-main" id="contenu-principal">
         <section class="wish-detail">
             <figure class="wish-detail__backdrop">
                 <img src={{ $game['cover_url'] }}
@@ -53,5 +52,4 @@
                 </div>
             </div>
         </section>
-    </main>
 @endsection

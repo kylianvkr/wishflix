@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-<main class="wishflix-main" id="contenu-principal">
     <section class="wish-login" aria-labelledby="login-title">
         <div class="card wish-login__card">
             <div class="card-body">
@@ -42,4 +41,3 @@
             </div>
         </div>
     </section>
-</main>

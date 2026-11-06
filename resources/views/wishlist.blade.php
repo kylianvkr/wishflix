@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-    <main class="wishflix-main" id="contenu-principal">
         <section class="wish-wishlist">
             <header class="wish-wishlist__header">
                 <h1>Ma wishlist</h1>
@@ -120,4 +119,3 @@
                 </article>
             </div>
         </section>
-    </main>
