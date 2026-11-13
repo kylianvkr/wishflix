@@ -119,3 +119,4 @@
                 </article>
             </div>
         </section>
+@endsection

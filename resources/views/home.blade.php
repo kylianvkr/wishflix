@@ -102,21 +102,21 @@
                 @forelse ($games as $id => $game)
                     <article class="card movie-card game-card" aria-label="Jeu The Witcher 3">
                         <figure class="game-card__cover">
-                            <img src={{ $game['cover_url'] }}
+                            <img src={{ $game->cover_url }}
                                 alt="Affiche de The Witcher 3" width="300" height="450" />
                         </figure>
 
                         <div class="card-body game-card__body">
                             <div class="game-card__badges">
-                                <span class="badge badge-secondary">{{ $game['category'] }}</span>
+                                <span class="badge badge-secondary">{{ $game->category }}</span>
                                 <span class="badge badge-success">Disponible</span>
                             </div>
 
-                            <h3 class="card-title game-card__title">{{ $game['title'] }}</h3>
-                            <p class="game-card__meta">{{ $game['release_year'] }} - {{ implode(', ', $game['platforms']) }}</p>
+                            <h3 class="card-title game-card__title">{{ $game->title }}</h3>
+                            <p class="game-card__meta">{{ $game->release_year }} - {{ $game->platforms->pluck('name')->implode(', ') }}</p>
 
                             <div class="game-card__rating" aria-label="Note moyenne">
-                                <span class="game-card__rating-value">{{ $game['rating'] }}</span>
+                                <span class="game-card__rating-value">{{ $game->rating }}</span>
                                 <span class="game-card__rating-max">/10</span>
                             </div>
 
@@ -125,8 +125,8 @@
                             </p>
 
                             <div class="card-actions game-card__actions">
-                                <a class="btn btn-sm btn-ghost" href="{{ route('game.show', $id) }}"
-                                    aria-label="Voir les details de {{ $game['title'] }}">
+                                <a class="btn btn-sm btn-ghost" href="{{ route('game.show', $game->id) }}"
+                                    aria-label="Voir les details de {{ $game->title }}">
                                     Details
                                 </a>
                                 <button class="btn btn-sm btn-outline">Wishlist</button>
