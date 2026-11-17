@@ -23,7 +23,7 @@
             <div class="wish-detail__meta">
                 <span class="badge badge-primary">{{ $game->category->name }}</span>
                 <span class="badge badge-outline">{{ $game->release_year }}</span>
-                <span class="badge badge-ghost">{{ implode(', ', $game->platforms) }}</span>
+                <span class="badge badge-ghost"> a faire</span>
             </div>
 
             <p class="wish-detail__description">

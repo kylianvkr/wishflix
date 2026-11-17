@@ -7,9 +7,10 @@
 @endsection
 
 @section('content')
+    @if ($featured)
     <section class="hero wishflix-hero" aria-labelledby="hero-title">
         <figure class="wishflix-hero__backdrop">
-            <img src="https://via.assets.so/game.png?id=1&q=95&w=1600&h=900&fit=cover"
+            <img src="{{ $featured->cover_url }}"
                 alt="Image de couverture de The Witcher 3" width="1600" height="900" />
         </figure>
         <div class="wishflix-hero__veil" aria-hidden="true"></div>
@@ -19,26 +20,77 @@
                 <p class="wishflix-hero__kicker">Nouveaute WishFlix</p>
                 <div class="wishflix-hero__meta">
                     <span class="badge badge-primary">A la une</span>
-                    <span class="badge badge-ghost">RPG</span>
+                    <span class="badge badge-ghost">{{ $featured->category->name }}</span>
                     <span class="badge badge-outline">PC, PS5, Xbox</span>
                 </div>
 
                 <h1 id="hero-title" class="wishflix-hero__title">
-                    The Witcher 3
+                    {{ $featured->title }}
                 </h1>
                 <p class="wishflix-hero__description">
-                    Incarnez Geralt de Riv, un chasseur de monstres professionnel,
-                    dans un monde ouvert fantastique rempli de quêtes épiques et de
-                    choix moraux difficiles.
+                    {{ $featured->synopsis }}
                 </p>
-                <p class="wishflix-hero__details">2015 | 4.8/5 | 100h de jeu</p>
+                <p class="wishflix-hero__details">{{ $featured->release_year }} | {{ $featured->rating }}/10 | {{ $featured->playtime_hours }}h de jeu</p>
 
                 <div class="wishflix-hero__actions">
-                    <a class="btn btn-primary btn-lg" href="game-detail.html">Voir la fiche</a>
+                    <a class="btn btn-primary btn-lg" href="{{ route('game.show', $featured->id) }}">Voir la fiche</a>
                     <button class="btn btn-outline btn-lg">
                         Ajouter a la wishlist
                     </button>
                 </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <section class="wish-section" aria-labelledby="catalogue-title">
+        <header class="wish-section__header">
+            <div>
+                <h2 class="wish-section__title" id="catalogue-title">
+                    Mieux notées
+                </h2>
+            </div>
+        </header>
+
+        <div class="wish-section__content">
+            <div class="wish-home__grid">
+                @forelse ($topRated as $id => $game)
+                    <article class="card movie-card game-card" aria-label="Jeu The Witcher 3">
+                        <figure class="game-card__cover">
+                            <img src={{ $game->cover_url }}
+                                alt="Affiche de The Witcher 3" width="300" height="450" />
+                        </figure>
+
+                        <div class="card-body game-card__body">
+                            <div class="game-card__badges">
+                                <span class="badge badge-secondary">{{ $game->category->name }}</span>
+                                <span class="badge badge-success">Disponible</span>
+                            </div>
+
+                            <h3 class="card-title game-card__title">{{ $game->title }}</h3>
+                            <p class="game-card__meta">{{ $game->release_year }} </p>
+
+                            <div class="game-card__rating" aria-label="Note moyenne">
+                                <span class="game-card__rating-value">{{ $game->rating }}</span>
+                                <span class="game-card__rating-max">/10</span>
+                            </div>
+
+                            <p class="game-card__synopsis">
+                                {{ $game['synopsis'] }}
+                            </p>
+
+                            <div class="card-actions game-card__actions">
+                                <a class="btn btn-sm btn-ghost" href="{{ route('game.show', $game->id) }}"
+                                    aria-label="Voir les details de {{ $game->title }}">
+                                    Details
+                                </a>
+                                <button class="btn btn-sm btn-outline">Wishlist</button>
+                            </div>
+                        </div>
+                    </article>
+                @empty
+                    <p>Aucun jeu disponible.</p>
+                @endforelse
             </div>
         </div>
     </section>
@@ -108,12 +160,12 @@
 
                         <div class="card-body game-card__body">
                             <div class="game-card__badges">
-                                <span class="badge badge-secondary">{{ $game->category }}</span>
+                                <span class="badge badge-secondary">{{ $game->category->name }}</span>
                                 <span class="badge badge-success">Disponible</span>
                             </div>
 
                             <h3 class="card-title game-card__title">{{ $game->title }}</h3>
-                            <p class="game-card__meta">{{ $game->release_year }} - {{ $game->platforms->pluck('name')->implode(', ') }}</p>
+                            <p class="game-card__meta">{{ $game->release_year }} </p>
 
                             <div class="game-card__rating" aria-label="Note moyenne">
                                 <span class="game-card__rating-value">{{ $game->rating }}</span>
